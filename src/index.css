@@ -11,3 +11,148 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.flag-container{
+  width: auto;
+  height: auto;
+}
+
+.header{
+    height: 11vh;
+    box-shadow: 10px 10px white;
+}
+
+.container {
+  padding: 1rem;
+}
+
+.input-details-container{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.search-for-country {
+  padding-left: 2.4rem;
+}
+
+.select-by-region {
+  width : 10rem;
+  margin-right: 6rem;
+}
+
+.country-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+}
+
+.country-container {
+  flex: 0 0;
+  margin: 1.4rem;
+  width: 11rem;
+}
+
+.flag-image {
+  width : 100%;
+  height: 6.5rem;
+}
+
+.country-details {
+  width:auto;
+  height: auto;
+  margin: 1rem;
+  text-align: left;
+}
+
+.country-name {
+  font-size: 1.3rem;
+  font-family:  sans-serif;
+  margin: 0rem;
+}
+
+.country-population {
+  font-size: 0.8rem;
+  font-family:  sans-serif;
+  margin: 0rem;
+  padding-top: 0.5rem;
+}
+
+.where-in-the-world{
+  float: left;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 5.1rem;
+}
+
+.theme-container {
+  float: right;
+  margin-right: 3rem;
+  margin-top: 0.7rem;
+}
+
+.single-country-data-container{
+  padding : 3rem;
+  width: auto;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.single-country-back-container{
+  margin-bottom: 1rem;
+  margin-left: 2rem;
+}
+
+.back-button {
+  float: left;
+  width: 5.5rem;
+}
+
+.single-country-details-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.country-image{
+  margin-left: 2rem;
+  width: 25rem;
+}
+
+.country-details-container { 
+  margin-left: 6rem;
+}
+
+.country-details-name {
+  font-size: 1.3rem;
+  padding-bottom: 1rem;
+  margin: 0rem;
+  padding-top: 1rem;
+  display: flex;
+}
+
+.country-sub-details{
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: table;
+  padding-bottom: 0.5rem;
+}
+
+.country-borders {
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: table;
+}
+
+.country-sub-details-value{
+  font-size: 0.7rem;
+  font-weight: 400;
+  padding-left: 5px;
+}
+
+.country-button {
+  width : 5rem;
+}
