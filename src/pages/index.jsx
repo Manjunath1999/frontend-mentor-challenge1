@@ -13,40 +13,45 @@ function Flag() {
   const [searchValue, setSearchValue] = useState("")
   const [region, setRegion] = useState("")
   const [country, setCountry] = useState([])
-  const [allRegion, setAllRegion] = useState(["Asia,America,Europe,Australia"])
+  const [allRegion, setAllRegion] = useState(["Asia", "America", "Europe", "Australia", "None"])
   const [themeColour, setthemeColour] = useState("white")
   const [splitFlag, setSplitFlag] = useState(false)
   const [splitData, setSplitData] = useState(null)
 
   var countryData = [
-    { name: "Afghanistan", nativeName: "Afghanistan", subRegion: "Asia",population: 38928346, "flag": "https://flagcdn.com/ai.svg", "capital": "Kabul", "region": "Asia", borderCoutries: ["India", "Pakistan", "Australia"] },
-    { name: "Albania", nativeName: "Albania", subRegion: "Asia", population: 2877797, "flag": "https://flagcdn.com/al.svg", "capital": "Mariehamn", "region": "Americas", borderCoutries: ["India", "China", "Azerbajain"] },
+    { name: "Afghanistan", nativeName: "Afghanistan", subRegion: "Asia", population: 38928346, "flag": "https://flagcdn.com/ai.svg", "capital": "Kabul", "region": "Asia", borderCoutries: ["India", "Pakistan", "Australia"] },
+    { name: "Albania", nativeName: "Albania", subRegion: "America", population: 2877797, "flag": "https://flagcdn.com/al.svg", "capital": "Mariehamn", "region": "America", borderCoutries: ["India", "China", "Azerbajain"] },
     { name: "Algeria", nativeName: "Algeria", subRegion: "Asia", population: 43851044, "flag": "https://flagcdn.com/dz.svg", "capital": "Tirana", "region": "Asia", borderCoutries: ["India", "Pakistan"] },
-    { name: "Andorra", nativeName: "Andorra", subRegion: "Asia", population: 77265, "flag": "https://flagcdn.com/as.svg", "capital": "Algiers", "region": "Americas", borderCoutries: ["India", "China", "Azerbajain"] },
-    { name: "Angola", nativeName: "Angola", subRegion: "Asia", population: 32866272, "flag": "https://flagcdn.com/ad.svg", "capital": "Luanda", "region": "Asias", borderCoutries: [ "China", "Azerbajain"] },
-    { name: "Argentina", nativeName: "Argentina",subRegion: "Asia", population: 45195777, "flag": "https://flagcdn.com/ao.svg", "capital": "The Valley", "region": "Asias", borderCoutries: ["India", "Pakistan"] },
-    { name: "Armenia", nativeName: "Armenia", subRegion: "Asia", population: 2963243, "flag": "https://flagcdn.com/ai.svg", "capital": "Saint John's", "region": "Asias", borderCoutries: ["India", "Pakistan"] },
+    { name: "Andorra", nativeName: "Andorra", subRegion: "America", population: 77265, "flag": "https://flagcdn.com/as.svg", "capital": "Algiers", "region": "America", borderCoutries: ["India", "China", "Azerbajain"] },
+    { name: "Angola", nativeName: "Angola", subRegion: "Asia", population: 32866272, "flag": "https://flagcdn.com/ad.svg", "capital": "Luanda", "region": "Asia", borderCoutries: ["China", "Azerbajain"] },
+    { name: "Argentina", nativeName: "Argentina", subRegion: "Asia", population: 45195777, "flag": "https://flagcdn.com/ao.svg", "capital": "The Valley", "region": "Asia", borderCoutries: ["India", "Pakistan"] },
+    { name: "Armenia", nativeName: "Armenia", subRegion: "Australia", population: 2963243, "flag": "https://flagcdn.com/ai.svg", "capital": "Saint John's", "region": "Asia", borderCoutries: ["India", "Pakistan"] },
     { name: "Australia", nativeName: "Australia", subRegion: "Asia", population: 25499884, "flag": "https://flagcdn.com/aq.svg", "capital": "Buenos Aires", "region": "Australia", borderCoutries: ["India", "Azerbajain"] },
-    { name: "Austria", nativeName: "Austria", subRegion: "Asia", population: 9006398, "flag": "https://flagcdn.com/ag.svg", "capital": "Yerevan", "region": "Europe", borderCoutries: ["India", "Pakistan", "Azerbajain"] },
-    { name: "Azerbaijan", nativeName: "Azerbaijan",subRegion: "Asia", population: 10139177, "flag": "https://flagcdn.com/ar.svg", "capital": "Oranjestad", "region": "Asias", borderCoutries: ["India", "China", "Azerbajain"] }
+    { name: "Austria", nativeName: "Austria", subRegion: "Europe", population: 9006398, "flag": "https://flagcdn.com/ag.svg", "capital": "Yerevan", "region": "Europe", borderCoutries: ["India", "Pakistan", "Azerbajain"] },
+    { name: "Azerbaijan", nativeName: "Azerbaijan", subRegion: "Asia", population: 10139177, "flag": "https://flagcdn.com/ar.svg", "capital": "Oranjestad", "region": "Asia", borderCoutries: ["India", "China", "Azerbajain"] }
   ];
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
-    if(e.target.value == "")
-      {
-        setCountry(countryData)
-      }
-      else {
-        const filteredData = countryData.filter((c) => c.name.toLowerCase().startsWith(e.target.value))
-        debugger;
-        setCountry(filteredData)
-      }
+    if (e.target.value == "") {
+      setCountry(countryData)
+    }
+    else {
+      const filteredData = countryData.filter((c) => c.name.toLowerCase().startsWith(e.target.value.trim().toLowerCase()))
+      setCountry(filteredData)
+    }
 
   }
 
   const handleRegionChange = (e) => {
     setRegion(e.target.value);
+    if (e.target.value.trim() == "None") {
+      setCountry(countryData)
+    }
+    else {
+      const filteredData = countryData.filter((c) => c.region.toLowerCase().includes(e.target.value.trim().toLowerCase()))
+      setCountry(filteredData)
+    }
   }
 
   function fetchCountryData() {
@@ -126,7 +131,7 @@ function Flag() {
                     top: '50%', // Center the label vertically
                     transform: 'translateY(-50%)', // Adjust the label position
                     fontSize: '12px', // Change the font size of the label
-                    padding: "1rem"
+                    padding: "0.6rem"
                   },
                   '& .MuiInputLabel-shrink': {
                     color: themeColour === "black" ? "white" : "black",
@@ -136,60 +141,62 @@ function Flag() {
             </div>
             <div className='select-by-region'>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Filter by Region</InputLabel>
-
-                {allRegion && allRegion.map((a, index) => {
-                  return (
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={region}
-                      label="region"
-                      onChange={handleRegionChange}
-                      MenuProps={{
-                        PaperProps: {
-                          sx: {
-                            backgroundColor: themeColour === "black" ? "#36454F" : "white",
-                            '& .MuiMenuItem-root': {
-                              color: themeColour === "black" ? "white" : "black",
-                            },
-                          },
-                        },
-                      }}
-                      sx={{
-                        backgroundColor: themeColour == "black" ? "#36454F" : "white",
-                        borderColor: "white",
-                        borderRadius: "5px",
-                        fontSize: "3px",
-                        '& .MuiOutlinedInput-root': {
-                          height: '48px',
-                          color: themeColour === "black" ? "white" : "black",
-                          '& input': {
-                            color: themeColour === "black" ? "white" : "black", // Set text color inside the input
-                          },
-                          '& fieldset': {
-                            borderColor: themeColour == "black" ? "#36454F" : "white", // Set border color to white
-                          },
-                          '&:hover fieldset': {
-                            borderColor: themeColour == "black" ? "#36454F" : "white", // Set border color to white on hover
-                          },
-                          '&.Mui-focused fieldset': {
-                            borderColor: themeColour == "black" ? "#36454F" : "white", // Set border color to white when focused
-                          },
-                        },
-                        '& .MuiInputLabel-root': {
+                <InputLabel id="demo-simple-select-label" sx={{ fontSize: "0.8rem", color: themeColour === "black" ? "white" : "black", }}>Filter by Region</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={region}
+                  label="region"
+                  onChange={handleRegionChange}
+                  MenuProps={{
+                    PaperProps: {
+                      sx: {
+                        backgroundColor: themeColour === "black" ? "#36454F" : "white",
+                        '& .MuiMenuItem-root': {
                           color: themeColour === "black" ? "white" : "black",
                         },
-                        '& .MuiSelect-icon': {
-                          color: themeColour === "black" ? "white" : "black", // Dropdown arrow color
-                        },
-
-                      }}
-                    >
+                      },
+                    },
+                  }}
+                  sx={{
+                    backgroundColor: themeColour == "black" ? "#36454F" : "white",
+                    borderColor: "white",
+                    borderRadius: "5px",
+                    fontSize: "1rem !important",
+                    '& .MuiOutlinedInput-root': {
+                      height: '48px',
+                      '& input': {
+                        color: themeColour === "black" ? "white" : "black", // Set text color inside the input
+                      },
+                      '& fieldset': {
+                        borderColor: themeColour == "black" ? "#36454F" : "white", // Set border color to white
+                      },
+                      '&:hover fieldset': {
+                        borderColor: themeColour == "black" ? "#36454F" : "white", // Set border color to white on hover
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: themeColour == "black" ? "#36454F" : "white", // Set border color to white when focused
+                      },
+                    },
+                    '& .MuiSelect-select': {
+                      padding: "12px",
+                      color: themeColour === "black" ? "white" : "black"
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: themeColour === "black" ? "white" : "black",
+                    },
+                    '& .MuiSelect-icon': {
+                      color: themeColour === "black" ? "white" : "black", // Dropdown arrow color
+                    },
+                  }}
+                >
+                  {allRegion && allRegion.map((a, index) => {
+                    return (
                       <MenuItem key={index} value={a}>{a}</MenuItem>
-                    </Select>
-                  )
-                })}
+                    )
+                  })}
+                </Select>
+
 
               </FormControl>
             </div>
